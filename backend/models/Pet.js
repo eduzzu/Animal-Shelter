@@ -13,6 +13,11 @@ const petSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    gender: {
+        type: String,
+        enum: ["M", "F"],
+        required: true
+    },
     size: {
         type: String,
         required: true

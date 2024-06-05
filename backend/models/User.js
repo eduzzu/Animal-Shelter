@@ -19,11 +19,9 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        age: {
-            type: Number,
+        birthDate: {
+            type: Date,
             required: true,
-            min: 18,
-            max: 100
         },
         picturePath: {
             type: String,

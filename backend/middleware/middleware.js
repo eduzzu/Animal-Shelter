@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
 export const verifyToken = async (req, res, next) => {
     try {
@@ -20,4 +21,18 @@ export const verifyToken = async (req, res, next) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+}
+
+export const isMyAccount = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (user.id !== req.user.id && req.user.isAdmin === false) {
+            return res.status(401).json(`You do not have permission to do that`)
+        }
+        next();
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+
 }

@@ -10,7 +10,7 @@ export const register = async (req, res) => {
             lastName,
             email,
             password,
-            age,
+            birthDate,
             picturePath,
             occupation,
             location
@@ -21,11 +21,11 @@ export const register = async (req, res) => {
             lastName,
             email,
             password: await hashPassword(password),
-            age,
+            birthDate,
             picturePath,
             occupation,
             location,
-            petsAdopted: Math.floor(Math.random() * 5),
+            petsAdopted: 0,
 
         });
 
@@ -41,8 +41,8 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
 
-        if (!email || !password) {
-            return res.status(400).json(`Username and password are required!`)
+        if (!email || !password || password.length < 8) {
+            return res.status(400).json(`Invalid credentials!`)
         }
 
         if (!user) {
@@ -54,7 +54,7 @@ export const login = async (req, res) => {
             return res.status(401).json(`Invalid credentials.`)
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);
         delete user.password;
         res.status(200).json({ token, user });
 
