@@ -7,7 +7,7 @@ const adoptionSchema = mongoose.Schema({
         required: true
     },
     petId: {
-        type: Mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Pet',
         required: true
     },

@@ -35,7 +35,10 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        petsAdopted: Number,
+        petsAdopted: {
+            type: Number,
+            default: 0
+        },
         appointments: {
             type: [String],
             default: []

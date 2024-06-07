@@ -36,3 +36,16 @@ export const isMyAccount = async (req, res, next) => {
     }
 
 }
+
+export const isAdmin = async(req, res, next) => {
+    try{
+        if(req.user.isAdmin === false) {
+            return res.status(401).json("You do not have permission to do that!");
+        }
+        next();
+    } catch(error) {
+        return res.status(500).json({message: error.message});
+    }
+    
+
+}

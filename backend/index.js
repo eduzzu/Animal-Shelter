@@ -10,7 +10,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import petsRoutes from "./routes/pets.js";
 import { register } from "./controllers/auth.js";
+import { addPet, editPet } from "./controllers/pets.js";
+import { isAdmin, verifyToken } from "./middleware/middleware.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -38,9 +41,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/auth/register", upload.single("picture"), register);
+app.post("/pets/newPet", upload.single("picture"), verifyToken, isAdmin, addPet );
+app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, editPet);
 
 app.use("/auth", authRoutes);
-app.use("/users", userRoutes)
+app.use("/users", userRoutes);
+app.use("/pets", petsRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
