@@ -13,7 +13,7 @@ import userRoutes from "./routes/users.js";
 import petsRoutes from "./routes/pets.js";
 import adoptionRoutes from "./routes/adoptions.js";
 import { register } from "./controllers/auth.js";
-import { addPet, editPet } from "./controllers/pets.js";
+import { addPet, editPet, updatePetStatus } from "./controllers/pets.js";
 import { isAdmin, verifyToken } from "./middleware/middleware.js";
 import { updateAllPets } from "./utils/utils.js";
 
@@ -44,7 +44,7 @@ const upload = multer({ storage });
 
 app.post("/auth/register", upload.single("picture"), register);
 app.post("/pets/newPet", upload.single("picture"), verifyToken, isAdmin, addPet );
-app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, editPet);
+app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, updatePetStatus, editPet);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
