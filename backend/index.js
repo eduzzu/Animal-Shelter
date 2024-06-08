@@ -11,9 +11,11 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import petsRoutes from "./routes/pets.js";
+import adoptionRoutes from "./routes/adoptions.js";
 import { register } from "./controllers/auth.js";
 import { addPet, editPet } from "./controllers/pets.js";
 import { isAdmin, verifyToken } from "./middleware/middleware.js";
+import { updateAllPets } from "./utils/utils.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -47,6 +49,9 @@ app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, edi
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/pets", petsRoutes);
+app.use("/adoptions", adoptionRoutes);
+
+// updateAllPets();
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;

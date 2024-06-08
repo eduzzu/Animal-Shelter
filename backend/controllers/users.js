@@ -1,3 +1,4 @@
+import Adoption from "../models/Adoption.js";
 import User from "../models/User.js";
 import { hashPassword } from "../utils/utils.js";
 

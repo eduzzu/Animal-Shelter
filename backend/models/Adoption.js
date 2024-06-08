@@ -31,8 +31,8 @@ const adoptionSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    appointmentDate: {
-        type: Date,
+    phoneNumber: {
+        type: String,
         required: true
     },
     message: {
@@ -41,7 +41,7 @@ const adoptionSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Accept", "Denied", "Pending"],
+        enum: ["Accepted", "Denied", "Pending"],
         default: "Pending"
     }
 }, { timestamps: true }

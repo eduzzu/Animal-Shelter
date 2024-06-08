@@ -34,6 +34,12 @@ const petSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        required: true,
+        enum: ["Available", "Adopted"],
+        default: "Available"
+    },
     description: {
         type: String,
         required: true

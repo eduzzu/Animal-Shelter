@@ -39,10 +39,6 @@ const userSchema = mongoose.Schema(
             type: Number,
             default: 0
         },
-        appointments: {
-            type: [String],
-            default: []
-        },
         isAdmin: {
             type: Boolean,
             default: false

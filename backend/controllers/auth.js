@@ -13,7 +13,8 @@ export const register = async (req, res) => {
             birthDate,
             picturePath,
             occupation,
-            location
+            location,
+            petsAdopted
         } = req.body;
 
         const newUser = new User({
@@ -25,7 +26,7 @@ export const register = async (req, res) => {
             picturePath,
             occupation,
             location,
-            petsAdopted: 0,
+            petsAdopted,
 
         });
 

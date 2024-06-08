@@ -24,6 +24,7 @@ export const addPet = async(req, res) => {
             size,
             picturePath,
             health,
+            status,
             description,
             previousOwners,
             viewedPet: Math.floor(Math.random() * 100)
@@ -46,11 +47,12 @@ export const editPet = async(req, res) => {
         size,
         picturePath,
         health,
+        status,
         description,
         previousOwners
     } = req.body;
 
-    if(!name || !age || !size || !picturePath || !health || !description || !previousOwners) {
+    if(!name || !age || !size || !picturePath || !health || !description || !previousOwners || !status) {
         return res.status(400).json("Please fill all these fields correctly!");
     }
 
@@ -62,6 +64,7 @@ export const editPet = async(req, res) => {
             size,
             picturePath,
             health,
+            status,
             description,
             previousOwners
         }, {new: true}
