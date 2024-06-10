@@ -6,33 +6,24 @@ import { hashPassword } from "../utils/utils.js";
 export const register = async (req, res) => {
     try {
         const {
-            firstName,
-            lastName,
-            email,
-            password,
-            birthDate,
-            picturePath,
-            occupation,
+            fullName,
             location,
-            petsAdopted
+            email,
+            password,  
         } = req.body;
 
         const newUser = new User({
-            firstName,
-            lastName,
+            fullName,
+            location,
             email,
             password: await hashPassword(password),
-            birthDate,
-            picturePath,
-            occupation,
-            location,
-            petsAdopted,
-
+        
         });
 
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };

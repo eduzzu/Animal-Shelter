@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
     {
-        firstName: {
+        fullName: {
             type: String,
             required: true
         },
-        lastName: {
+        location: {
             type: String,
             required: true
         },
@@ -19,26 +19,7 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        birthDate: {
-            type: Date,
-            required: true,
-        },
-        picturePath: {
-            type: String,
-            required: true
-        },
-        occupation: {
-            type: String,
-            required: true
-        },
-        location: {
-            type: String,
-            required: true
-        },
-        petsAdopted: {
-            type: Number,
-            default: 0
-        },
+        
         isAdmin: {
             type: Boolean,
             default: false

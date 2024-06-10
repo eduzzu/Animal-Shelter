@@ -1,4 +1,3 @@
-import Adoption from "../models/Adoption.js";
 import User from "../models/User.js";
 import { hashPassword } from "../utils/utils.js";
 
@@ -25,30 +24,24 @@ export const editUserAccount = async (req, res) => {
     try {
         const { id } = req.params;
         const {
-            firstName,
-            lastName,
+            fullName,
+            location,
             email,
             password,
-            birthDate,
-            picturePath,
-            occupation,
-            location
+            
         } = req.body;
-        if (!firstName || !lastName || !email || !password || !birthDate || !picturePath || !occupation || !location) {
+        if (!fullName || !email || !password || !location) {
             return res.status(400).json(`Please fill all these fields correctly! ${error}`);
         }
 
         const updatedUser = await User.findByIdAndUpdate(
             id,
             {
-                firstName,
-                lastName,
+                fullName,
+                location,
                 email,
                 password: await hashPassword(password),
-                birthDate,
-                picturePath,
-                occupation,
-                location
+                
             }, { new: true })
 
         if (!updatedUser) {
