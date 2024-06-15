@@ -113,7 +113,7 @@ const HomePage = () => {
                             <SanitizerIcon sx={{fontSize: 60}} />
                         </Box>
                         <Typography variant="h6" mb="5%" gutterBottom color="#9381ff">
-                            COVID-19 RESOURCES
+                            PETS HEALTH RESOURCES
                         </Typography>
                         <Typography gutterBottom color="grey">
                             Find out the pets health needs

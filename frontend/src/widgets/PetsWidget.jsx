@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PetWidget from "./PetWidget";
 import {setPets} from "../state/petsSlice.js"
 import { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Link } from "@mui/material";
 
 const PetsWidget = () => {
     const pets = useSelector((state) => state.pets.pets);
@@ -19,12 +19,13 @@ const PetsWidget = () => {
         const selectedPets = shuffledPets.slice(0,4);
         dispatch(setPets({pets: selectedPets}))
   
-        console.log(pets)
     };
 
     useEffect(() => {
         getPets();
     }, []); //eslint-disable-line react-hooks/exhaustive-deps
+
+    
 
     return (
         <Box
@@ -34,6 +35,7 @@ const PetsWidget = () => {
                 gap: "4%",
                 justifyContent: "center",
                 m: "5% 7%",
+                textDecoration: "none"
             }}
         >
         {
@@ -47,16 +49,21 @@ const PetsWidget = () => {
                     breed
                     
                 }) => {
+                    
                     return (
-                        <PetWidget
-                            key={_id}
-                            petId={_id}
-                            picturePath={picturePath}
-                            name={name}
-                            age={age}
-                            category={category}
-                            breed={breed}
-                        />
+                        <a href={`pets/${_id}`} style={{textDecoration: "none"}}>
+                            <PetWidget
+                                key={_id}
+                                petId={_id}
+                                picturePath={picturePath}
+                                name={name}
+                                age={age}
+                                category={category}
+                                breed={breed}
+                            />
+                            
+                        </a>
+                        
                     )
 
                 }
