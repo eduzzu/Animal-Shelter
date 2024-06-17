@@ -5,6 +5,10 @@ import { CssBaseline } from '@mui/material';
 import HomePage from './scenes/homePage/HomePage.jsx';
 import React from 'react';
 import PetPage from './scenes/petPage/PetPage.jsx';
+import Dogs from './scenes/petPages/Dogs.jsx';
+import Cats from './scenes/petPages/Cats.jsx';
+import Hamsters from './scenes/petPages/Hamsters.jsx';
+import Parrots from './scenes/petPages/Parrots.jsx';
 
 function App() {
 
@@ -17,6 +21,10 @@ function App() {
           <Routes>
             <Route path='/'element={<Login />} />
             <Route path="/home" element={isAuth ? <HomePage /> : <Navigate to="/" />} />
+            <Route path='/pets/dogs' element={isAuth ? <Dogs /> : <Navigate to="/" />} />
+            <Route path='/pets/cats' element={isAuth ? <Cats /> : <Navigate to="/" />} />
+            <Route path='/pets/hamsters' element={isAuth ? <Hamsters /> : <Navigate to="/" />} />
+            <Route path='/pets/parrots' element={isAuth ? <Parrots /> : <Navigate to="/" />} />
             <Route path="/pets/:id" element={isAuth ? <PetPage /> : <Navigate to="/" />} />
           </Routes>
       </BrowserRouter>

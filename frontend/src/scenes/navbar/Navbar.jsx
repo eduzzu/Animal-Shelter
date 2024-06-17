@@ -64,6 +64,7 @@ const Navbar = () => {
                     sx={{
                         color: "white"
                     }}
+                    onClick={() => navigate("/pets/dogs")}
                 >
                     Dogs
                 </Button>
@@ -72,6 +73,8 @@ const Navbar = () => {
                     sx={{
                         color: "white"
                     }}
+                    onClick={() => navigate("/pets/cats")}
+                    
                 >
                     Cats
                 </Button>
@@ -80,6 +83,7 @@ const Navbar = () => {
                     sx={{
                         color: "white"
                     }}
+                    onClick={() => navigate("/pets/hamsters")}
                 >
                     Hamsters
                 </Button>
@@ -90,6 +94,7 @@ const Navbar = () => {
                         color: "white"
 
                     }}
+                    onClick={() => navigate("/pets/parrots")}
                 >
                     Parrots
                 </Button>
