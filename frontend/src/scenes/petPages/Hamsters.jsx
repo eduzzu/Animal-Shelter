@@ -35,7 +35,7 @@ const Hamsters = () => {
         getHamsters();
     }, []);
 
-    if (!Hamsters) return null;
+    if (!hamsters) return null;
    
     const breeds = Array.from(new Set(hamsters.map((h) => h.breed)));
     const ages = Array.from(new Set(hamsters.map((h) => h.age)));
