@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import AdvertsWidget from "../../widgets/AdvertsWidget"
-import Footer from "../../footer/Footer"
+import Footer from "../footer/Footer"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

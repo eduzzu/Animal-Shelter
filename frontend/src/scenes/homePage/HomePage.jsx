@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import SanitizerIcon from '@mui/icons-material/Sanitizer';
 import QuizIcon from '@mui/icons-material/Quiz';
-import Footer from "../../footer/Footer";
+import Footer from "../footer/Footer";
 
 const HomePage = () => {
     return (
@@ -63,7 +63,7 @@ const HomePage = () => {
                         textShadow: "2px 2px 4px #000",
                     }}
                 >
-                    Choose from 10000+ pets available in our shelter!
+                    Choose from various pets available in our shelter!
                 </Typography>
             </Box>
 

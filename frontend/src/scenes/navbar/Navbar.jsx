@@ -38,8 +38,6 @@ const Navbar = () => {
                 color="white"
                 ml="4rem"
                 onClick={() => navigate("/home")}
-
-
             >
                 Furry Friends
             </Typography>
@@ -56,8 +54,9 @@ const Navbar = () => {
                     sx={{
                         color: "white"
                     }}
+                    onClick={() => navigate("/home")}
                 >
-                    Adopt
+                    Home
                 </Button>
 
                 <Button
@@ -102,6 +101,7 @@ const Navbar = () => {
             </Box>
                 <Select
                     value={fullName}
+                    onClick={() => navigate(`/users/${user._id}`)}
                     sx={{
                         backgroundColor: "transparent",
                         color: "white",

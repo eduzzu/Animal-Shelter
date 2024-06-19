@@ -9,7 +9,8 @@ const AdvertsWidget = () => {
                 cursor: "pointer",
                 display: "flex",
                 justifyContent: "center",
-                mt: "4%"
+                mt: "4%",
+                mb: "3%"
             }}
         >
 

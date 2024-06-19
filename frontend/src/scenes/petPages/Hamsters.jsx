@@ -5,7 +5,7 @@ import { Box, FormHelperText, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import Select from "react-select";
 import AdvertsWidget from "../../widgets/AdvertsWidget";
-import Footer from "../../footer/Footer";
+import Footer from "../footer/Footer";
 
 const Hamsters = () => {
 
@@ -37,10 +37,10 @@ const Hamsters = () => {
 
     if (!hamsters) return null;
    
-    const breeds = Array.from(new Set(hamsters.map((h) => h.breed)));
-    const ages = Array.from(new Set(hamsters.map((h) => h.age)));
+    const breeds = Array.from(new Set(hamsters.map((h) => h.breed))).sort();
+    const ages = Array.from(new Set(hamsters.map((h) => h.age))).sort();
     const genders = Array.from(new Set(hamsters.map((h) => h.gender)));
-    const sizes = Array.from(new Set(hamsters.map((h) => h.size)));
+    const sizes = Array.from(new Set(hamsters.map((h) => h.size))).sort().reverse();
 
     const breedsOptions = breeds.map((breed) => ({ value: breed, label: breed }));
     const agesOptions = ages.map((age) => ({ value: age, label: age }));

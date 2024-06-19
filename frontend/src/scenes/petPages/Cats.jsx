@@ -5,7 +5,7 @@ import { Box, FormHelperText, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import Select from "react-select";
 import AdvertsWidget from "../../widgets/AdvertsWidget";
-import Footer from "../../footer/Footer";
+import Footer from "../footer/Footer";
 
 const Cats = () => {
 
@@ -37,10 +37,10 @@ const Cats = () => {
 
     if (!cats) return null;
    
-    const breeds = Array.from(new Set(cats.map((c) => c.breed)));
-    const ages = Array.from(new Set(cats.map((c) => c.age)));
+    const breeds = Array.from(new Set(cats.map((c) => c.breed))).sort();
+    const ages = Array.from(new Set(cats.map((c) => c.age))).sort();
     const genders = Array.from(new Set(cats.map((c) => c.gender)));
-    const sizes = Array.from(new Set(cats.map((c) => c.size)));
+    const sizes = Array.from(new Set(cats.map((c) => c.size))).sort().reverse();
 
     const breedsOptions = breeds.map((breed) => ({ value: breed, label: breed }));
     const agesOptions = ages.map((age) => ({ value: age, label: age }));
