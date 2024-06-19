@@ -23,6 +23,11 @@ const userSchema = mongoose.Schema(
         isAdmin: {
             type: Boolean,
             default: false
+        },
+        adoptions: {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'Adoption',
+            default: []
         }
     }, { timestamps: true }
 );

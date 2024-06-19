@@ -1,5 +1,8 @@
 import Adoption from "../models/Adoption.js";
 import User from "../models/User.js";
+import Pet from "../models/Pet.js";
+import mongoose from "mongoose";
+import { updateUserAdoptions } from "../utils/utils.js";
 
 
 export const createRequest = async (req, res) => {
@@ -7,7 +10,9 @@ export const createRequest = async (req, res) => {
         const { petId } = req.params;
         const userId = req.user.id;
         const existingRequest = await Adoption.findOne({userId, petId});
-        
+        const pet = await Pet.findById(petId);
+        console.log(pet)
+
         if(existingRequest) {
             return res.status(404).json("You have already sent a request to adopt this pet.");
         }
@@ -22,7 +27,7 @@ export const createRequest = async (req, res) => {
             message
         } = req.body;
 
-        
+        console.log(pet.name, pet.breed)
 
         const newRequest = new Adoption({
             userId: req.user.id,
@@ -34,6 +39,9 @@ export const createRequest = async (req, res) => {
             occupation,
             phoneNumber,
             message,
+            petName: pet.name,
+            petBreed: pet.breed,
+            petCategory: pet.category
         });
 
         const savedRequest = await newRequest.save();
@@ -41,6 +49,8 @@ export const createRequest = async (req, res) => {
         if (!savedRequest) {
             return res.status(404).json({ message: error.message });
         }
+
+        await User.findByIdAndUpdate(userId, { $push: { adoptions: savedRequest._id } });
 
         return res.status(201).json(savedRequest);
     } catch (error) {
@@ -50,13 +60,9 @@ export const createRequest = async (req, res) => {
 
 export const deleteRequest = async (req, res) => {
     try {
-        const { requestId } = req.params;
-        const request = await Adoption.findByIdAndDelete(requestId);
-
-        if (!request) {
-            return res.status(404).json(`Adoption request not found.`);
-        }
-
+        const { id, requestId } = req.params;
+        await updateUserAdoptions(id, requestId, 'remove');
+        await Adoption.findByIdAndDelete(requestId);
         return res.status(200).json(`Adoption request deleted successfully!`);
     } catch (error) {
         return res.status(500).json({ message: error.message });
@@ -80,16 +86,17 @@ export const getAdoptionRequests = async(req, res) => {
 
 export const getUsersAdoptionRequests = async(req, res) => {
     try{
-        const {userId} = req.params;
-        const user = await User.findById(userId)
+        const {id} = req.params;
+        const user = await User.findById(id)
 
         if(!user) {
             return res.status(404).json("User not found.");
         }
 
-        const userRequest = await Adoption.find({userId}).populate("petId");
+        const userRequest = await Adoption.find({userId: id}).populate("petId");
 
-        if (userRequests.length === 0) {
+
+        if (userRequest.length === 0) {
             return res.status(404).json({ message: "User has no adoption requests." });
         }
 

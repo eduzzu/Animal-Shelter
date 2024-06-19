@@ -11,6 +11,9 @@ const adoptionSchema = mongoose.Schema({
         ref: 'Pet',
         required: true
     },
+    petName: String,
+    petBreed: String,
+    petCategory: String,
     firstName: {
         type: String,
         required: true
@@ -41,8 +44,8 @@ const adoptionSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["Accepted", "Denied", "Pending"],
-        default: "Pending"
+        enum: ["Accepted", "Denied", "Pending..."],
+        default: "Pending..."
     }
 }, { timestamps: true }
 );
