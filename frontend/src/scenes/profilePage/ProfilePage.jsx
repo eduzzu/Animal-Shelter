@@ -1,4 +1,4 @@
-import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
+import { Box, Typography, List, ListItem } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import AdvertsWidget from "../../widgets/AdvertsWidget";
@@ -24,7 +24,6 @@ const ProfilePage = () => {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}` }
                 });
-
                 const data = await response.json();
                 setUser(data);
             } catch (error) {
@@ -34,11 +33,13 @@ const ProfilePage = () => {
 
         getUser();
     }, [id, token]);
+    console.log(user)
+    
 
     useEffect(() => {
         const getUsersAdoptionRequests = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/adoptions/${id}`, {
+                const response = await fetch(`http://localhost:3001/requests/${id}`, {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -55,6 +56,7 @@ const ProfilePage = () => {
     }, [id, token]);
 
     if (!user) return null;
+    if(!userAdoptionRequests) return null;
 
     const { fullName, location, email, isAdmin } = user;
 
@@ -226,7 +228,7 @@ const ProfilePage = () => {
     </List>
     {userAdoptionRequests.length >=2 ? (
         <Button
-        onClick={() => navigate(`/adoptions/${id}`)}
+        onClick={() => navigate(`/requests/${id}`)}
         sx={{
             width: "43%",
             m: "1% 0 1% 3%",
@@ -241,7 +243,7 @@ const ProfilePage = () => {
     </Button>
     ) : userAdoptionRequests.length === 1 ? (
         <Button
-        onClick={() => navigate(`/adoptions/${id}`)}
+        onClick={() => navigate(`/requests/${id}`)}
         sx={{
             width: "43%",
             m: "23% 0 1% 3%",

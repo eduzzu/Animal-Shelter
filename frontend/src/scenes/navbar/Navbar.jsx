@@ -37,7 +37,7 @@ const Navbar = () => {
                 fontSize="2rem"
                 color="white"
                 ml="4rem"
-                onClick={() => navigate("/home")}
+                onClick={() => user.isAdmin === true ? navigate("/home/admin") : navigate("/home")}
             >
                 Furry Friends
             </Typography>
@@ -54,7 +54,7 @@ const Navbar = () => {
                     sx={{
                         color: "white"
                     }}
-                    onClick={() => navigate("/home")}
+                    onClick={() => user.isAdmin === true ? navigate("/home/admin") : navigate("/home")}
                 >
                     Home
                 </Button>
@@ -105,10 +105,10 @@ const Navbar = () => {
                     sx={{
                         backgroundColor: "transparent",
                         color: "white",
-                        width: "150px",
+                        flexGrow: 0.1,
                         borderRadius: "0.25rem",
                         p: "0.25rem 0.2rem",
-                        ml: "9rem"
+                        ml: "9%"
 
                     }}
                     input={<InputBase />}

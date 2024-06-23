@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import AdvertsWidget from "../../widgets/AdvertsWidget";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 import { Box, Typography, List, ListItem, Card, CardContent } from "@mui/material";
@@ -9,14 +8,15 @@ import seeAdoptionsBGIMG from "../../public/assets/seeAdoptionsBGIMG.jpg"
 
 const SeeUserAdoptions = () => {
 
-    const token = useSelector((state) => state.auth.token)
+    const token = useSelector((state) => state.auth.token);
+    const navigate = useNavigate();
     const { id } = useParams();
     const [userAdoptionRequests, setUserAdoptionRequests] = useState([]);
 
     useEffect(() => {
         const getUsersAdoptionRequests = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/adoptions/${id}`, {
+                const response = await fetch(`http://localhost:3001/requests/${id}`, {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}` }
                 });
@@ -76,6 +76,7 @@ const SeeUserAdoptions = () => {
                         {userAdoptionRequests.map((adoption) => (
                             <ListItem key={adoption.id}>
                                 <Card
+                                onClick={() => navigate(`/requests/${adoption._id}/adoption`)}
                                     sx={{
                                         width: "100%",
                                         borderRadius: "20px",

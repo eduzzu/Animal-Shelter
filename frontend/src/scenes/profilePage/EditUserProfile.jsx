@@ -70,7 +70,7 @@ const EditUserProfile = () => {
             <Box
                 sx={{
                     height: "100%",
-                    width: "45%",
+                    width: "40%",
                     margin: "5% 1% 5% 3%",
                     pb: "1.5%",
                     border: "1px solid rgb(235, 230, 230)",
@@ -115,64 +115,64 @@ const EditUserProfile = () => {
                 </Typography>
 
                 <form style={{ color: "white" }} onSubmit={handleEditUserProfile} >
-                    <Typography sx={{ ml: "3%" }}>Full Name:</Typography>
+                    <Typography sx={{ ml: "7%" }}>Full Name:</Typography>
                     <TextField
                         type="text"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         sx={{
-                            width: "55%",
-                            ml: "3%",
+                            width: "65%",
+                            ml: "7%",
                             mb: "2%",
                         }}
                     />
 
-                    <Typography sx={{ ml: "3%" }}>Location:</Typography>
+                    <Typography sx={{ ml: "7%" }}>Location:</Typography>
                     <TextField
                         type="text"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         sx={{
-                            width: "55%",
-                            ml: "3%",
+                            width: "65%",
+                            ml: "7%",
                             mb: 2
                         }}
                     />
 
-                    <Typography sx={{ ml: "3%" }}>Email:</Typography>
+                    <Typography sx={{ ml: "7%" }}>Email:</Typography>
                     <TextField
                         type="email"
 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         sx={{
-                            width: "55%",
-                            ml: "3%",
+                            width: "65%",
+                            ml: "7%",
                             mb: 2,
 
                         }}
                     />
 
-                    <Typography sx={{ ml: "3%" }}>Password:</Typography>
+                    <Typography sx={{ ml: "7%" }}>Password:</Typography>
                     <TextField
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                         sx={{
-                            width: "55%",
-                            ml: "3%",
+                            width: "65%",
+                            ml: "7%",
                             mb: 2,
 
                         }}
                     />
 
-                    <Typography sx={{ ml: "3%" }}>isAdmin:</Typography>
+                    <Typography sx={{ ml: "7%" }}>isAdmin:</Typography>
                     <TextField
                         type="text"
                         value={isAdmin}
                         disabled
                         sx={{
-                            width: "55%",
-                            ml: "3%",
+                            width: "65%",
+                            ml: "7%",
                             mb: 2
                         }}
                     />
@@ -180,7 +180,7 @@ const EditUserProfile = () => {
                         type="submit"
                         variant="contained"
                         color="warning"
-                        sx={{ ml: "-55%", mt: "11.5%" }}
+                        sx={{ ml: "-65%", mt: "11.5%" }}
                     >Save Changes
                     </Button>
                 </form>

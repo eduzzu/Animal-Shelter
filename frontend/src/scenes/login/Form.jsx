@@ -89,7 +89,11 @@ const Form = () => {
             })
           );
 
-          navigate("/home");
+          if (loggedIn.user.isAdmin) {
+            navigate('/home/admin');
+        } else {
+            navigate('/home');
+        }
         }
       };
     

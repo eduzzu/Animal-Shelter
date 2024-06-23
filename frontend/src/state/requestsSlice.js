@@ -22,12 +22,10 @@ export const requestsSlice = createSlice({
 
         setRequestStatus: (state, action) => {
             const {requestId, newStatus} = action.payload;
-            const requestToUpdate = state.request.find(request => request.id === requestId);
-            if(requestToUpdate) {
-                requestToUpdate.status = newStatus;
-            } else {
-                console.error(`Request with id ${requestId} not found.`)
-            }
+            const updatedRequests = state.requests.map(request =>
+                request.id === requestId ? { ...request, status: newStatus } : request
+            );
+            state.requests = updatedRequests;
         }
     }
 });

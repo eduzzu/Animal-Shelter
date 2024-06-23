@@ -12,10 +12,17 @@ import Parrots from './scenes/petPages/Parrots.jsx';
 import ProfilePage from './scenes/profilePage/ProfilePage.jsx';
 import EditUserProfile from './scenes/profilePage/EditUserProfile.jsx';
 import SeeUserAdoptions from './scenes/profilePage/SeeUserAdoptions.jsx';
+import AdminHomePage from './scenes/admin/adminHomePage/AdminHomePage.jsx';
+import SeeAllPets from './scenes/admin/pets/SeeAllPets.jsx';
+import SeeAllRequests from './scenes/admin/requests/SeeAllRequests.jsx';
+import SeeAllUsers from './scenes/admin/users/SeeAllUsers.jsx';
+import RequestPage from "./scenes/requests/RequestPage.jsx";
+import AddPet from './scenes/admin/pets/AddPet.jsx';
 
 function App() {
 
   const isAuth = Boolean(useSelector((state) => state.auth.token));
+  const isAdmin = Boolean(useSelector((state) => state.auth.isAdmin));
 
   return (
     <div className='app'>
@@ -24,14 +31,20 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path="/home" element={isAuth ? <HomePage /> : <Navigate to="/" />} />
+          <Route path='/pets' element={isAuth && isAdmin ?  <SeeAllPets /> : <Navigate to="/home" />} />
           <Route path='/pets/dogs' element={isAuth ? <Dogs /> : <Navigate to="/" />} />
           <Route path='/pets/cats' element={isAuth ? <Cats /> : <Navigate to="/" />} />
           <Route path='/pets/hamsters' element={isAuth ? <Hamsters /> : <Navigate to="/" />} />
           <Route path='/pets/parrots' element={isAuth ? <Parrots /> : <Navigate to="/" />} />
+          <Route path='/pets/newPet' element={isAuth && isAdmin ? <AddPet /> : <Navigate to={"/home"} />} />
           <Route path="/pets/:id" element={isAuth ? <PetPage /> : <Navigate to="/" />} />
+          <Route path="/users" element={isAuth && isAdmin ? <SeeAllUsers /> : <Navigate to="/home" />} />
           <Route path="/users/:id" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
           <Route path='/users/:id/edit' element={isAuth ? <EditUserProfile /> : <Navigate to={"/"} />} />
-          <Route path='/adoptions/:id' element={isAuth ? <SeeUserAdoptions /> : <Navigate to={"/"} />} />
+          <Route path='/requests' element={isAuth && isAdmin ? <SeeAllRequests /> : <Navigate to={"/home"} />} />
+          <Route path='/requests/:id' element={isAuth ? <SeeUserAdoptions /> : <Navigate to={"/"} />} />
+          <Route path='/requests/:requestId/adoption' element={isAuth ? <RequestPage /> : <Navigate to={"/home"} />} />
+          <Route path='/home/admin' element={isAuth && isAdmin ? <AdminHomePage /> : <Navigate to={"/home"} />} />
         </Routes>
       </BrowserRouter>
     </div>
