@@ -1,7 +1,7 @@
 import express from "express";
 import { editUserAccount, getUser, getUsers, deleteUserAccount } from "../controllers/users.js";
 import {isAdmin, isMyAccount, verifyToken} from "../middleware/middleware.js";
-import { deleteRequest } from "../controllers/adoption.js";
+import { deleteRequest } from "../controllers/requests.js";
 
 const router = express.Router();
 

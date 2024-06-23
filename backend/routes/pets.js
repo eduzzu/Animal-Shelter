@@ -1,7 +1,7 @@
 import express from "express";
 import { isAdmin, verifyToken } from "../middleware/middleware.js";
 import { deletePet, filterPets, getPet, getPets } from "../controllers/pets.js";
-import { createRequest } from "../controllers/adoption.js";
+import { createRequest } from "../controllers/requests.js";
 
 const router = express.Router();
 

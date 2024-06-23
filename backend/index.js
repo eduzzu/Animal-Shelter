@@ -11,7 +11,7 @@ import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import petsRoutes from "./routes/pets.js";
-import adoptionRoutes from "./routes/adoptions.js";
+import requestRoutes from "./routes/requests.js";
 import { addPet, editPet, updatePetStatus } from "./controllers/pets.js";
 import { isAdmin, verifyToken } from "./middleware/middleware.js";
 import { updateAllPets } from "./utils/utils.js";
@@ -47,7 +47,7 @@ app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, upd
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/pets", petsRoutes);
-app.use("/adoptions", adoptionRoutes);
+app.use("/requests", requestRoutes);
 
 // updateAllPets();
 

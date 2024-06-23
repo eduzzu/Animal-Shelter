@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const adoptionSchema = mongoose.Schema({
+const requestSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -50,5 +50,5 @@ const adoptionSchema = mongoose.Schema({
 }, { timestamps: true }
 );
 
-const Adoption = mongoose.model("Adoption", adoptionSchema);
-export default Adoption;
+const Request = mongoose.model("Request", requestSchema);
+export default Request;

@@ -24,9 +24,9 @@ const userSchema = mongoose.Schema(
             type: Boolean,
             default: false
         },
-        adoptions: {
+        requests: {
             type: [mongoose.Schema.Types.ObjectId],
-            ref: 'Adoption',
+            ref: 'Request',
             default: []
         }
     }, { timestamps: true }
