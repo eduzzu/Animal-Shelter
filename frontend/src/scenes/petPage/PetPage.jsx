@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import AdvertsWidget from "../../widgets/AdvertsWidget"
 import Footer from "../footer/Footer"
@@ -11,13 +11,16 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { removePet } from "../../state/petsSlice";
 
 const PetPage = () => {
 
     const { id } = useParams();
     const [pet, setPet] = useState(null);
     const token = useSelector((state) => state.auth.token);
-
+    const isAdmin = useSelector((state) => state.auth.isAdmin);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const getPet = async () => {
 
@@ -34,13 +37,12 @@ const PetPage = () => {
         }
     }
 
-
     useEffect(() => {
         getPet();
     }, [id]);
 
     if (!pet) return null;
-    console.log(pet)
+
     const {
         name,
         age,
@@ -72,6 +74,27 @@ const PetPage = () => {
         createData("Previous Owners", previousOwners),
         createData("People who watched this pet", viewedPet),
     ];
+
+    const handleDeletePet = async () => {
+        const confirmed = window.confirm("Are you sure you want to delete this pet?");
+        
+        if (confirmed) {
+            try {
+                const response = await fetch(`http://localhost:3001/pets/${id}/deletePet`, {
+                    method: "DELETE",
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                dispatch(removePet(id)); 
+                navigate('/pets'); 
+            } catch (error) {
+                console.error("Error deleting pet:", error);
+            }
+        }
+    };
 
     return (
         <Box>
@@ -120,16 +143,15 @@ const PetPage = () => {
                             width: "60%",
                             padding: "2% 10%",
                             border: "1px solid #9381ff",
-                            borderRadius: "30px",
+                            borderRadius: "20px",
                             fontSize: "16px",
                             fontFamily: "inherit",
                             fontWeight: "bold",
                             color: "white",
                             backgroundColor: "#9381ff",
                             "&:hover": {color: "white", backgroundColor: "#9900ff"}
-
-                            
                         }}
+                        onClick={() => navigate(`/pets/${pet._id}/adopt`)}
                     >Enquire about {name}
                     </Button>
                     </Typography>
@@ -151,8 +173,8 @@ const PetPage = () => {
                                     <TableCell component="th" scope="row">
                                         {row.name}
                                     </TableCell>
-                                    <TableCell align="left" sx={{ fontWeight: "bold" }}>{row.statName}</TableCell>
-                                    <TableCell align="left" sx={{ color: "#9381ff" }}>{row.stat}</TableCell>
+                                    <TableCell align="left" sx={{ fontWeight: "bold", fontFamily: "revert" }}>{row.statName}</TableCell>
+                                    <TableCell align="left" sx={{ color: "#9381ff", fontFamily: "revert" }}>{row.stat}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -184,6 +206,45 @@ const PetPage = () => {
                 
                 
             </Box>
+
+            
+
+                {isAdmin && (
+                    <Box
+                        sx={{
+                            mt: "2%",
+                            ml: "6%",
+                            display: "flex"
+                            
+                        }}
+                    >
+                        <Button variant="contained" color="warning"
+                            sx={{
+                                mr: "2%",
+                                borderRadius: "10px",
+                                p: "0.5% 2.5%"
+                            }}
+                            onClick={() => navigate(`/pets/${id}/editPet`)}
+                        >Edit Pet
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={handleDeletePet}
+                            sx={{
+                                ml: "2%",
+                                borderRadius: "10px",
+                                p: "0.5% 2%"
+                            }}
+            >
+                Delete Pet
+            </Button>
+                        
+                    </Box>
+                    )}
+
+            
+
             <AdvertsWidget />
             <Footer />
         </Box>

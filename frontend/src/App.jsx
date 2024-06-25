@@ -18,6 +18,8 @@ import SeeAllRequests from './scenes/admin/requests/SeeAllRequests.jsx';
 import SeeAllUsers from './scenes/admin/users/SeeAllUsers.jsx';
 import RequestPage from "./scenes/requests/RequestPage.jsx";
 import AddPet from './scenes/admin/pets/AddPet.jsx';
+import SendRequest from './scenes/requests/sendRequest/SendRequest.jsx';
+import EditPetPage from './scenes/admin/pets/EditPetPage.jsx';
 
 function App() {
 
@@ -38,12 +40,14 @@ function App() {
           <Route path='/pets/parrots' element={isAuth ? <Parrots /> : <Navigate to="/" />} />
           <Route path='/pets/newPet' element={isAuth && isAdmin ? <AddPet /> : <Navigate to={"/home"} />} />
           <Route path="/pets/:id" element={isAuth ? <PetPage /> : <Navigate to="/" />} />
+          <Route path="/pets/:id/editPet" element={isAuth && isAdmin ? <EditPetPage /> : <Navigate to="/home" />} />
+          <Route path="/pets/:petId/adopt" element={isAuth ? <SendRequest /> : <Navigate to="/" />} />
           <Route path="/users" element={isAuth && isAdmin ? <SeeAllUsers /> : <Navigate to="/home" />} />
           <Route path="/users/:id" element={isAuth ? <ProfilePage /> : <Navigate to="/" />} />
           <Route path='/users/:id/edit' element={isAuth ? <EditUserProfile /> : <Navigate to={"/"} />} />
           <Route path='/requests' element={isAuth && isAdmin ? <SeeAllRequests /> : <Navigate to={"/home"} />} />
           <Route path='/requests/:id' element={isAuth ? <SeeUserAdoptions /> : <Navigate to={"/"} />} />
-          <Route path='/requests/:requestId/adoption' element={isAuth ? <RequestPage /> : <Navigate to={"/home"} />} />
+          <Route path='/requests/:id/adoption' element={isAuth ? <RequestPage /> : <Navigate to={"/"} />} />
           <Route path='/home/admin' element={isAuth && isAdmin ? <AdminHomePage /> : <Navigate to={"/home"} />} />
         </Routes>
       </BrowserRouter>

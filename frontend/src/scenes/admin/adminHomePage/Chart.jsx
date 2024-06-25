@@ -109,7 +109,7 @@ const Chart = () => {
             width={850}
             height={400}
           />
-          <Typography sx={{ textAlign: "center", fontFamily: "revert" }}>Users Enrolled</Typography>
+          <Typography sx={{ textAlign: "center", fontFamily: "revert" }}>Users Enrolled in 2024</Typography>
         </Box>
       </Box>
     );

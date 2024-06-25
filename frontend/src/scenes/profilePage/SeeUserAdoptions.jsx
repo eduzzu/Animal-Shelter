@@ -29,7 +29,10 @@ const SeeUserAdoptions = () => {
         };
 
         getUsersAdoptionRequests();
-    }, [id, token]);
+    }, []);
+
+    if(!userAdoptionRequests) return null;
+    console.log(userAdoptionRequests)
     return (
         <Box>
             <Navbar />

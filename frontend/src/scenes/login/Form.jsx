@@ -78,9 +78,7 @@ const Form = () => {
         });
         
         const loggedIn = await loggedInResponse.json();
-        console.log(loggedInResponse, loggedIn)
         onSubmitProps.resetForm();
-
         if (loggedIn) {
           dispatch(
             setLogin({
@@ -88,7 +86,7 @@ const Form = () => {
               token: loggedIn.token,
             })
           );
-
+          console.log(loggedIn.user.isAdmin)
           if (loggedIn.user.isAdmin) {
             navigate('/home/admin');
         } else {

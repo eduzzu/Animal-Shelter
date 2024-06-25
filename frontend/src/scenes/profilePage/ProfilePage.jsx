@@ -33,7 +33,6 @@ const ProfilePage = () => {
 
         getUser();
     }, [id, token]);
-    console.log(user)
     
 
     useEffect(() => {
@@ -43,23 +42,20 @@ const ProfilePage = () => {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}` }
                 });
-
                 const data = await response.json();
-                const dataForProfile = data.slice(-data.length +2);
+                const dataForProfile = (data.length >= 2 ? data.slice(-2) : data.slice(-1)).reverse();
                 setUserAdoptionRequests(dataForProfile);
+    
             } catch (error) {
                 console.error("Cannot fetch user's adoption requests data.", error);
             }
         };
-
+    
         getUsersAdoptionRequests();
     }, [id, token]);
 
     if (!user) return null;
     if(!userAdoptionRequests) return null;
-
-    const { fullName, location, email, isAdmin } = user;
-
 
 
     return (
@@ -95,7 +91,7 @@ const ProfilePage = () => {
                             fontFamily: "revert",
 
                         }}
-                    >Full name: {fullName}
+                    >Full name: {user.fullName}
                     </Typography>
 
                     <Typography
@@ -103,7 +99,7 @@ const ProfilePage = () => {
                             m: "3% 0 3% 3%",
                             fontFamily: "revert",
                         }}
-                    >Email: {email}
+                    >Email: {user.email}
                     </Typography>
 
                     <Typography
@@ -111,7 +107,7 @@ const ProfilePage = () => {
                             m: "3% 0 3% 3%",
                             fontFamily: "revert",
                         }}
-                    >City: {location}
+                    >City: {user.location}
                     </Typography>
 
                     <Typography
@@ -127,7 +123,7 @@ const ProfilePage = () => {
                             m: "3% 0 3% 3%",
                             fontFamily: "revert",
                         }}
-                    >Admin: {isAdmin ? "TRUE" : "FALSE"}
+                    >Admin: {user.isAdmin ? "TRUE" : "FALSE"}
                     </Typography>
 
                     <Typography

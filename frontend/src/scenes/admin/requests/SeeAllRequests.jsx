@@ -4,7 +4,6 @@ import { Box, Typography, List, ListItem, Card, CardContent } from "@mui/materia
 import Navbar from "../../navbar/Navbar";
 import Footer from "../../footer/Footer";
 import { setRequests } from "../../../state/requestsSlice";
-import adminSeeAllAdoptions from "../../../public/assets/adminSeeAllAdoptions.jpg";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useNavigate } from "react-router-dom";
@@ -39,11 +38,7 @@ const SeeAllRequests = () => {
 
     return (
         <Box
-            sx={{
-                backgroundImage: `url(${adminSeeAllAdoptions})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
-            }}
+
         >
             <Navbar />
             <Box
@@ -92,11 +87,12 @@ const SeeAllRequests = () => {
                     <Card
                         onClick={() => navigate(`/requests/${request._id}/adoption`)}
                         sx={{
-                            width: "40%",
+                            width: "30%",
                             borderRadius: "20px",
                             cursor: "pointer",
                             height: "8.5%",
-                            backgroundColor: "#e5e5e5"
+                            backgroundColor: "white",
+                            ml: "5%"
                         }}
                     >
                         <CardContent>
