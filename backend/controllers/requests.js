@@ -72,8 +72,8 @@ export const deleteRequest = async (req, res) => {
 
 export const getAdoptionRequest = async(req, res) => {
     try{
-        const {requestId} = req.params;
-        const request = await Request.findById(requestId);
+        const {id} = req.params;
+        const request = await Request.findById(id);
         if(!request) {
             return res.status(404).json(`Adoption requests not found.`);
         }
@@ -108,6 +108,7 @@ export const getUsersAdoptionRequests = async(req, res) => {
         }
 
         const userRequest = await Request.find({userId: id}).populate("petId");
+        
 
 
         if (userRequest.length === 0) {

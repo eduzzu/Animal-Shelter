@@ -42,7 +42,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post("/pets/newPet", upload.single("picture"), verifyToken, isAdmin, addPet );
-app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, updatePetStatus, editPet);
+app.put("/pets/:id/editPet", upload.single("picture"), verifyToken, isAdmin, editPet);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);

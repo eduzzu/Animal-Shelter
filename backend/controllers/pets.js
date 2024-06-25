@@ -1,4 +1,5 @@
 import Pet from "../models/Pet.js";
+import Request from "../models/Request.js"
 
 export const addPet = async (req, res) => {
     try {
@@ -52,10 +53,6 @@ export const editPet = async (req, res) => {
             previousOwners
         } = req.body;
 
-        if (!name || !age || !size || !picturePath || !health || !description || !previousOwners || !status) {
-            return res.status(400).json("Please fill all these fields correctly!");
-        }
-
         const updatedPet = await Pet.findByIdAndUpdate(
             id,
             {
@@ -89,6 +86,8 @@ export const deletePet = async (req, res) => {
         if (!pet) {
             return res.status(404).json("Can not delete. Pet not found.");
         }
+
+        await Request.deleteMany({ petId: id });
 
         return res.status(200).json("Pet deleted successfully!");
     } catch (error) {
